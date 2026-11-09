@@ -1,0 +1,56 @@
+{
+  "id": "ourapps-ae.poker-odds",
+  "name": "Poker odds",
+  "kind": "component",
+  "status": "example",
+  "package": "ourapps-ae/poker-odds",
+  "version": "0.3.0",
+  "ports": [
+    {
+      "id": "hand-ranking",
+      "name": "Hand ranking",
+      "direction": "input",
+      "kind": "interface",
+      "type": "ae/hand-ranking",
+      "version": "1.0.0",
+      "required": true,
+      "cardinality": "one"
+    },
+    {
+      "id": "card-deck",
+      "name": "Card deck",
+      "direction": "input",
+      "kind": "interface",
+      "type": "ae/card-deck",
+      "version": "1.0.0",
+      "required": true,
+      "cardinality": "one"
+    },
+    {
+      "id": "poker-odds",
+      "name": "Poker odds",
+      "direction": "output",
+      "kind": "interface",
+      "type": "ae/poker-odds",
+      "version": "1.0.0"
+    }
+  ],
+  "settings": [
+    {
+      "id": "sampleBoards",
+      "name": "Sampleboards",
+      "type": "number",
+      "required": false,
+      "secret": false,
+      "default": 2000
+    },
+    {
+      "id": "cacheSize",
+      "name": "Cachesize",
+      "type": "number",
+      "required": false,
+      "secret": false,
+      "default": 500
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "card-deck",
+  "type": "ae/card-deck",
+  "version": "1.0.0",
+  "notes": "poker-odds calls no card-deck operation itself. It reads the card codes (ranks, suits, rankOf, suitOf, fullDeck) through the `codes` member of the hand ranking it is given, which was built from card-deck's `cardCodes`.",
+  "operations": {
+    "cardCodes": {
+      "arguments": [],
+      "returns": "CardCodes (read through HandRanking.codes, never called here)"
+    }
+  }
+}

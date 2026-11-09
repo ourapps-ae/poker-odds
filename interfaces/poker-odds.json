@@ -1,0 +1,21 @@
+{
+  "id": "poker-odds",
+  "type": "ae/poker-odds",
+  "version": "1.0.0",
+  "types": {
+    "Card": "string, two characters: rank 2-9 T J Q K A then suit c d h s",
+    "OddsCard": "{code:Card|null,rank:string|null,suit:string|null,from:'hole'|'board'|'needed',spare:boolean}; a known card or one still to come, kickers marked spare",
+    "OddsRow": "{category:string,rank:number,probability:number,cards:OddsCard[],more:boolean}; rank 1 is a royal flush, probability is 1 for the hand already made",
+    "Needed": "{rank:string|null,suit:string|null}"
+  },
+  "operations": {
+    "rows": { "arguments": ["hole:Card[2]", "board:Card[0|3|4|5]", "trials?:number"], "returns": "OddsRow[] (the made hand first, then every better way with the exact chance it arrives by the river, most likely first)" },
+    "chance": { "arguments": ["category:string", "needed:Needed[]", "known:Card[]", "toCome:number"], "returns": "number (exact chance the needed cards are among the cards still to come)" },
+    "shownCards": { "arguments": ["hole:Card[]", "board:Card[]", "kickers?:number"], "returns": "OddsCard[] (a shown hand's combination in reading order, then the first kickers)" },
+    "winChance": { "arguments": ["hole:Card[]", "board:Card[]", "ranges:number|number[]", "trials:number", "rng:()=>number"], "returns": "number (chance of holding the best hand at the river; ties count a share; ranges give each opponent's lowest assumed starting score, or a count of unconstrained opponents)" },
+    "startingScore": { "arguments": ["cards:Card[2]"], "returns": "number (Chen's pre-flop score, -1 to 20)" }
+  },
+  "construction": {
+    "createOdds": { "arguments": ["ranking:HandRanking", "settings?:{sampleBoards:number,cacheSize:number}"], "returns": "Odds" }
+  }
+}

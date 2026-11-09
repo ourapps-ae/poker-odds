@@ -1,0 +1,101 @@
+{
+  "name": "poker-odds",
+  "version": "0.3.0",
+  "title": "Poker odds",
+  "description": "Winning and improvement chances for teaching and display: what a hand can still become with the exact chance, the chance of holding the best hand against opponents, and Chen's starting score.",
+  "facilities": [
+    {
+      "id": "poker-odds",
+      "description": "Hand improvement and winning chances"
+    }
+  ],
+  "provides": [
+    {
+      "id": "poker-odds",
+      "type": "ae/poker-odds",
+      "version": "1.0.0",
+      "path": "interfaces/poker-odds.json"
+    }
+  ],
+  "requires": [
+    {
+      "id": "hand-ranking",
+      "type": "ae/hand-ranking",
+      "version": "1.0.0",
+      "path": "interfaces/required/hand-ranking.json"
+    },
+    {
+      "id": "card-deck",
+      "type": "ae/card-deck",
+      "version": "1.0.0",
+      "path": "interfaces/required/card-deck.json"
+    }
+  ],
+  "collect": [
+    {
+      "id": "sampleBoards",
+      "type": "integer",
+      "grammar": "integer",
+      "required": false,
+      "secret": false,
+      "default": 2000
+    },
+    {
+      "id": "cacheSize",
+      "type": "integer",
+      "grammar": "integer",
+      "required": false,
+      "secret": false,
+      "default": 500
+    }
+  ],
+  "dependencies": [],
+  "suites": [
+    {
+      "id": "web",
+      "argv": [
+        "node",
+        "--test",
+        "tests/server.test.ts"
+      ],
+      "tools": {
+        "node": "26.5.0"
+      }
+    }
+  ],
+  "tools": {
+    "node": "26.5.0"
+  },
+  "platforms": [
+    "server"
+  ],
+  "text": {
+    "purpose": "Answers three questions about a player's two hole cards and the board. `rows`: what the hand is now and every better hand it can still become, each with the exact chance that the cards it needs arrive by the river, in the order a learner reads them (a straight low to high, pairs grouped, kickers last); counted exactly from the flop on and from a fixed sample of boards before it, and cached. `winChance`: the chance of holding the best hand at the river against some opponents, by simulation, where each opponent can be assumed to hold at least a given starting score (a raiser is not on a random hand). `startingScore`: Chen's pre-flop score. `shownCards`: a shown hand's combination in reading order with the kickers asked for.",
+    "userInputs": "The installer collects two optional integers:",
+    "integration": "Create it with `createOdds(ranking, settings)`, passing the hand-ranking interface (poker-hand-ranking) which carries the card codes and deck of the connected card-deck. A table shows `rows` to a player who asked for odds; poker-strategy calls `winChance` and `startingScore`; a replay screen calls `shownCards`. TypeScript only: the Swift and Kotlin apps display rows the server sends, they do not compute them.",
+    "infrastructure": "No deployed service, account or key. CPU only: exact counting for river and turn is a few milliseconds; the pre-flop sample of 2000 boards takes a few tens of milliseconds on this machine, then is served from the cache.",
+    "verification": "`node --test tests/server.test.ts` checks river, flop and pre-flop rows, the exact flush-draw probability against the closed form, `chance` against enumeration of every board that can follow, straight-flush and flush cases, the cache and its size setting, Chen's scores, known matchups within sampling error (aces against a random hand about 85 percent) and the effect of opponent ranges. The extraction was compared with the recipe's odds.ts and bot.ts equity on 60 random spots: rows, scores and win chances identical.",
+    "scenarios": "A learner taps 'my chances' on the flop and sees a flush at 35 percent and a pair at 100. A coach shows the chance of winning against three opponents before the flop. A computer player prices a call.",
+    "updates": "The seeded pre-flop sample determines the pre-flop rows. Removing the component removes the files; nothing is stored."
+  },
+  "agentInstructions": "Select this component when the application teaches or displays hand chances, and always when poker-strategy is selected. Connect its hand-ranking input to poker-hand-ranking and its card-deck input to the application's card-deck. Leave the settings at their defaults unless the pre-flop rows are too slow or too coarse.",
+  "developerInstructions": "No accounts or keys. `sampleBoards` (default 2000) is the number of pre-flop boards sampled for the rows; more is smoother and slower. `cacheSize` (default 500) is how many card sets are remembered. Call `createOdds(handRanking)` once and reuse it.",
+  "suitability": {
+    "format": 1,
+    "jobs": [
+      "poker-odds"
+    ],
+    "profiles": [
+      {
+        "id": "any",
+        "load": {},
+        "cost": "none",
+        "regions": [
+          "any"
+        ],
+        "compliance": []
+      }
+    ],
+    "notes": "Pure library, CPU only. No hosted service, account or provider limit applies; the cost per call is milliseconds (exact turn and river) to tens of milliseconds (pre-flop sample), measured informally on the build machine only."
+  }
+}

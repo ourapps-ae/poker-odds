@@ -1,0 +1,18 @@
+{
+  "format": 1,
+  "jobs": [
+    "poker-odds"
+  ],
+  "profiles": [
+    {
+      "id": "any",
+      "load": {},
+      "cost": "none",
+      "regions": [
+        "any"
+      ],
+      "compliance": []
+    }
+  ],
+  "notes": "Pure library, CPU only. No hosted service, account or provider limit applies; the cost per call is milliseconds (exact turn and river) to tens of milliseconds (pre-flop sample), measured informally on the build machine only."
+}
