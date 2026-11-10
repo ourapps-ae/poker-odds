@@ -1,6 +1,6 @@
 {
   "name": "poker-odds",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "title": "Poker odds",
   "description": "Winning and improvement chances for teaching and display: what a hand can still become with the exact chance, the chance of holding the best hand against opponents, and Chen's starting score.",
   "facilities": [
@@ -22,13 +22,13 @@
       "id": "hand-ranking",
       "type": "ae/hand-ranking",
       "version": "1.0.0",
-      "path": "interfaces/required/hand-ranking.json"
+      "path": "interfaces/required-hand-ranking.json"
     },
     {
       "id": "card-deck",
       "type": "ae/card-deck",
       "version": "1.0.0",
-      "path": "interfaces/required/card-deck.json"
+      "path": "interfaces/required-card-deck.json"
     }
   ],
   "collect": [

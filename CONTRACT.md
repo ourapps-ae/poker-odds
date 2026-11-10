@@ -19,14 +19,16 @@ The installer collects two optional integers:
 - `implementation/server/types.ts` -> `components/poker-odds/server/types.ts`
 
 Dependencies: none.
-`tools.lock.json` pins verification tools: node 26.5.0. Licence wording remains deferred.
+`tools.lock.json` pins verification tools: node 26.5.0. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
 
 ## Provided interfaces
-- `interfaces/poker-odds.json` defines `poker-odds` (ae/poker-odds) version 1.0.0.
+- `interfaces/poker-odds.json` defines `poker-odds` (ae/poker-odds) version 1.0.0: an OpenRPC 1.3.2 document, one method per function (a member of a created object is `<Type>.<member>`), with parameter, result and data types as JSON Schema 2020-12 (`components.schemas`) and thrown errors under `errors`.
 
 ## Required interfaces
 - `hand-ranking` (ae/hand-ranking) version 1.0.0, supplied by the recipe or application.
 - `card-deck` (ae/card-deck) version 1.0.0, supplied by the recipe or application.
+
+Each `interfaces/required-<id>.json` is a byte copy of the providing component's document.
 
 ## Integration
 Create it with `createOdds(ranking, settings)`, passing the hand-ranking interface (poker-hand-ranking) which carries the card codes and deck of the connected card-deck. A table shows `rows` to a player who asked for odds; poker-strategy calls `winChance` and `startingScore`; a replay screen calls `shownCards`. TypeScript only: the Swift and Kotlin apps display rows the server sends, they do not compute them.

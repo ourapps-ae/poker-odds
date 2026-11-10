@@ -3,7 +3,7 @@
 ## For the agent
 Select this component when the application teaches or displays hand chances, and always when poker-strategy is selected. Connect its hand-ranking input to poker-hand-ranking and its card-deck input to the application's card-deck. Leave the settings at their defaults unless the pre-flop rows are too slow or too coarse.
 
-- Select package `ourapps-ae/poker-odds` version `0.3.0`.
+- Select package `ourapps-ae/poker-odds` version `0.4.0`.
 - Settings to configure:
   - `sampleBoards` (integer; optional; default `2000`)
   - `cacheSize` (integer; optional; default `500`)
