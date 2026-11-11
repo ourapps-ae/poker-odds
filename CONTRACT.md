@@ -19,7 +19,7 @@ The installer collects two optional integers:
 - `implementation/server/types.ts` -> `components/poker-odds/server/types.ts`
 
 Dependencies: none.
-`tools.lock.json` pins verification tools: node 26.5.0. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
+`tools.lock.json` pins verification tools: node 26.5. Licence: `Apache-2.0` (`LICENCE`, `NOTICE`).
 
 ## Provided interfaces
 - `interfaces/poker-odds.json` defines `poker-odds` (ae/poker-odds) version 1.0.0: an OpenRPC 1.3.2 document, one method per function (a member of a created object is `<Type>.<member>`), with parameter, result and data types as JSON Schema 2020-12 (`components.schemas`) and thrown errors under `errors`.
@@ -42,7 +42,7 @@ No deployed service, account or key. CPU only: exact counting for river and turn
 ## Verification
 `node --test tests/server.test.ts` checks river, flop and pre-flop rows, the exact flush-draw probability against the closed form, `chance` against enumeration of every board that can follow, straight-flush and flush cases, the cache and its size setting, Chen's scores, known matchups within sampling error (aces against a random hand about 85 percent) and the effect of opponent ranges. The extraction was compared with the recipe's odds.ts and bot.ts equity on 60 random spots: rows, scores and win chances identical.
 
-- `node --test tests/server.test.ts` (web, required-local; tools: node 26.5.0)
+- `node --test tests/server.test.ts` (web, required-local; tools: node 26.5)
 
 ## Scenarios and presentation
 A learner taps 'my chances' on the flop and sees a flush at 35 percent and a pair at 100. A coach shows the chance of winning against three opponents before the flop. A computer player prices a call.
