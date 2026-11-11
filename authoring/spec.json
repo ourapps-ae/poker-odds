@@ -1,6 +1,6 @@
 {
   "name": "poker-odds",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "title": "Poker odds",
   "description": "Winning and improvement chances for teaching and display: what a hand can still become with the exact chance, the chance of holding the best hand against opponents, and Chen's starting score.",
   "facilities": [
